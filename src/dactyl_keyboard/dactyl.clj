@@ -19,7 +19,7 @@
 ;; Shape parameters ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
-(def nrows 5)
+(def nrows 4)
 (def ncols 6)
 
 (def α (/ π 12))                        ; curvature of the columns
@@ -42,14 +42,14 @@
 
 (defn column-offset [column]
   (cond
-    (= column 2) [0 2.82 -4.5]
+    (= column 2) [0 3 -2]
     ; pinkie height
     ; original
     ; (>= column 4) [0 -12 5.64]            ; original [0 -5.8 5.64]
     ; ian: raise pinkie columns a fraction
     ; v2
-    (= column 4) [0 -12 6.64]
-    (= column 5) [0 -12 7.64]
+    (= column 4) [0 -6 2]
+    (= column 5) [0 -6 -4]
     ; v3
     ; (>= column 4) [0 -12 7.64]
     :else [0 0 0]))
@@ -62,12 +62,7 @@
 
 ; original
 ; (def keyboard-z-offset 9)               ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
-; ian: want lowest profile possible
-; (def keyboard-z-offset 2.7)               ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
-; (def keyboard-z-offset 1.7)               ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
-; (def keyboard-z-offset 3.9)               ; pi / 8 tilt controls overall height; original=9 with centercol=3; use 16 for centercol=2
-; (def keyboard-z-offset 10)               ; pi / 7 tilt controls overall height; original=9 with centercol=3; use 16 for centercol=2
-(def keyboard-z-offset 15)               ; pi / 7 tilt controls overall height; original=9 with centercol=3; use 16 for centercol=2
+(def keyboard-z-offset 32)               ; pi / 7 tilt controls overall height; original=9 with centercol=3; use 16 for centercol=2
 
 (def extra-width 2.5)                   ; extra space between the base of keys; original= 2
 (def extra-height 1.0)                  ; original= 0.5
