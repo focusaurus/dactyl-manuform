@@ -49,7 +49,7 @@
     ; ian: raise pinkie columns a fraction
     ; v2
     (= column 4) [0 -6 2]
-    (= column 5) [0 -6 -4]
+    (= column 5) [0 -6 2]
     ; v3
     ; (>= column 4) [0 -12 7.64]
     :else [0 0 0]))
@@ -142,7 +142,7 @@
 (def sa-length 18.25)
 ; (def sa-double-length 37.5)
 (def sa-double-length 18.25)
-(def sa-cap {1 (let [bl2 (/ 18.5 2)
+(def choc-cap {1 (let [bl2 (/ 18.5 2)
                      m (/ 17 2)
                      key-cap (hull (->> (polygon [[bl2 bl2] [bl2 (- bl2)] [(- bl2) (- bl2)] [(- bl2) bl2]])
                                         (extrude-linear {:height 0.1 :twist 0 :convexity 0})
@@ -180,7 +180,7 @@
                         (color [240/255 223/255 175/255 1])))})
 
 ;;;;;;;;;;;;;;;;
-;; SA Keycaps ;;
+;; Choc Keycaps ;;
 ;;;;;;;;;;;;;;;;
 
 (def choc-length 18.25)
@@ -206,7 +206,7 @@
 (def columns (range 0 ncols))
 (def rows (range 0 nrows))
 
-(def cap-top-height (+ plate-thickness sa-profile-key-height))
+(def cap-top-height (+ plate-thickness choc-profile-key-height))
 (def row-radius (+ (/ (/ (+ mount-height extra-height) 2)
                       (Math/sin (/ α 2)))
                    cap-top-height))
@@ -216,10 +216,10 @@
 (def column-x-delta (+ -1 (- (* column-radius (Math/sin β)))))
 (def column-base-angle (* β (- centercol 2)))
 
-(defn is-choc [column row]
-  (or
+(defn is-choc [column row] true)
+  ;; (or
     ; (= column 4) (= column 5)))
-    (= column 5)))
+    ;; (= column 5)))
     ; (and (= column 5) (.contains [1 2 3] row))))  ; CHOCMOD
     ; (and (= column 4) (= row 2)))  ; CHOCMOD
 
@@ -299,12 +299,12 @@
                row rows
                :when (or (.contains [2 3] column)
                          (not= row lastrow))]
-          ;  (->> (sa-cap (if (= column 5) 1 1))
-          ;  (->> (if (and = row 1) (= column 5) (choc-cap 1) (sa-cap 1))
+          ;  (->> (choc-cap (if (= column 5) 1 1))
+          ;  (->> (if (and = row 1) (= column 5) (choc-cap 1) (choc-cap 1))
           ;  (->> (is-choc column row)  ; CHOCMOD
-           (->> (if (is-choc column row) (choc-cap 1) (sa-cap 1))  ; CHOCMOD
-          ;  (->> (if (and (= column 5) (= row 2)) (choc-cap 1) (sa-cap 1))  ; CHOCMOD
-          ;  (->> (if (= column 5) (choc-cap 1) (sa-cap 1))  ; CHOCMOD
+           (->> (if (is-choc column row) (choc-cap 1) (choc-cap 1))  ; CHOCMOD
+          ;  (->> (if (and (= column 5) (= row 2)) (choc-cap 1) (choc-cap 1))  ; CHOCMOD
+          ;  (->> (if (= column 5) (choc-cap 1) (choc-cap 1))  ; CHOCMOD
                 (key-place column row)))))
 ; TODO: edit this to put choc caps in some places
 ; TODO: choc height needs adjustment too
@@ -367,7 +367,7 @@
 ;; Thumbs ;;
 ;;;;;;;;;;;;
 
-(def thumborigin 
+(def thumborigin
   (map + (key-position 1 cornerrow [(/ mount-width 2) (- (/ mount-height 2)) 0])
          thumb-offsets))
 ; (pr thumborigin)
@@ -430,10 +430,10 @@
 
 (defn thumb-cap-shapes [shape]
   (union
-   (thumb-tr-place (sa-cap 1))
-   (thumb-tl-place (sa-cap 1))
-   (thumb-ml-place (sa-cap 1))
-   (thumb-bl-place (sa-cap 1))))
+   (thumb-tr-place (choc-cap 1))
+   (thumb-tl-place (choc-cap 1))
+   (thumb-ml-place (choc-cap 1))
+   (thumb-bl-place (choc-cap 1))))
 
 (defn thumb-15x-layout [shape] ())
 
@@ -448,7 +448,7 @@
 (def thumbcaps
   (union
    (thumb-cap-shapes 1)
-   (thumb-15x-layout (rotate (/ π 2) [0 0 1] (sa-cap 1.5)))))
+   (thumb-15x-layout (rotate (/ π 2) [0 0 1] (choc-cap 1.5)))))
 
 
 (def thumb
