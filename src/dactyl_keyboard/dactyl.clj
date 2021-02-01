@@ -885,7 +885,7 @@
                     connectors
                     thumb
                     thumb-connectors
-                    tent-platform
+                    ;; tent-platform
                     (difference (union case-walls
                                        screw-insert-outers
                                       ;  teensy-holder
